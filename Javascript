@@ -1,0 +1,22 @@
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+}
+
+function openPatientProfile(name) {
+    document.getElementById('patient-name').innerText = name;
+    showPage('patient-profile');
+}
+
+function uploadWoundPhoto() {
+    const fileInput = document.getElementById('wound-photo');
+    if (fileInput.files.length > 0) {
+        alert('Photo uploaded successfully!');
+    } else {
+        alert('Please select a photo.');
+    }
+}
+
+function savePatientData() {
+    alert('Patient data saved!');
+}
