@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Ward App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Hospital Ward App">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log("Service Worker Registered!", reg))
+                    .catch(err => console.log("Service Worker Registration Failed!", err));
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Hospital Ward</h1>
+        </header>
+        
+        <div id="journey-board" class="page active">
+            <h2>Journey Board</h2>
+            <div id="patient-list" class="patient-list">
+                <div class="patient-card" onclick="openPatientProfile('John Doe')">
+                    <img src="profile-placeholder.png" alt="Profile" class="profile-pic">
+                    <div>
+                        <h3>John Doe</h3>
+                        <p>Estimated Discharge: 12th March</p>
+                    </div>
+                </div>
+                <div class="patient-card" onclick="openPatientProfile('Jane Smith')">
+                    <img src="profile-placeholder.png" alt="Profile" class="profile-pic">
+                    <div>
+                        <h3>Jane Smith</h3>
+                        <p>Estimated Discharge: 15th March</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="patient-profile" class="page">
+            <button class="back-btn" onclick="showPage('journey-board')">&larr; Back</button>
+            <h2 id="patient-name"></h2>
+            <textarea id="handover-notes" placeholder="Enter clinical handover notes..."></textarea>
+            <input type="date" id="discharge-date">
+            
+            <h3>Upload Wound Photo</h3>
+            <input type="file" id="wound-photo" accept="image/*" capture="environment">
+            <button onclick="uploadWoundPhoto()">Upload</button>
+            
+            <button onclick="savePatientData()">Save</button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <button onclick="showPage('journey-board')">🏠 Home</button>
+    </nav>
+</body>
+</html>
